@@ -18,7 +18,7 @@
     <version>1.0.0</version>
 
     <name>java-devsecops</name>
-    <description>Java DevSecOps CI/CD project</description>
+    <description>Java DevSecOps Application</description>
 
     <properties>
         <java.version>17</java.version>
@@ -32,7 +32,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Boot Actuator -->
+        <!-- Actuator for health checks -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
