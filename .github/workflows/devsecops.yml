@@ -83,6 +83,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           ignore-unfixed: true
           exit-code: '1'
+          skip-dirs: 'path/to/skip'  # if applicable
 
 
   docker-build:
