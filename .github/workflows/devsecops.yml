@@ -1,0 +1,88 @@
+name: Java DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+
+  build-test-scan:
+
+    name: Build, Test and Security Scan
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout
+      
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # 2. Setup Java
+    
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      # 3. Run unit tests
+    
+      - name: Run Maven tests
+        run: mvn clean test
+
+      # 4. Dependency security scan
+      
+      - name: OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'java-devsecops'
+          path: '.'
+          format: 'HTML'
+          out: 'dependency-check-report'
+          args: >
+            --failOnCVSS 7
+
+      # 5. Upload security report
+
+      - name: Upload dependency scan report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: dependency-check-report/
+
+      # 6. Build application
+
+      - name: Build JAR
+        run: mvn package -DskipTests
+
+      # 7. Build Docker image
+    
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t java-devsecops:${{ github.sha }} \
+            .
+
+      # 8. Trivy image scan
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'java-devsecops:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
