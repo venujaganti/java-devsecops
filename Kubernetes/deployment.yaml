@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: java-devsecops
   namespace: devsecops
-  labels:
-    app: java-devsecops
 
 spec:
   replicas: 2
@@ -20,6 +19,7 @@ spec:
 
     spec:
       containers:
+
         - name: java-devsecops
 
           image: java-devsecops:1.0.0
@@ -33,20 +33,23 @@ spec:
             requests:
               cpu: "100m"
               memory: "128Mi"
+
             limits:
               cpu: "500m"
               memory: "512Mi"
-
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 30
-            periodSeconds: 10
 
           readinessProbe:
             httpGet:
               path: /health
               port: 8080
+
             initialDelaySeconds: 10
             periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+
+            initialDelaySeconds: 30
+            periodSeconds: 10

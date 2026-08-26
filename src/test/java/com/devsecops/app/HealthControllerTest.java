@@ -2,40 +2,33 @@ package com.devsecops.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(HealthController.class)
 class HealthControllerTest {
 
-    @LocalServerPort
-    private int port;
-
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
 
     @Test
-    void healthEndpointShouldReturnUp() {
+    void homeEndpointShouldReturnMessage() throws Exception {
 
-        String response = restTemplate.getForObject(
-                "http://localhost:" + port + "/health",
-                String.class);
-
-        assertEquals("UP", response);
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                        "Java DevSecOps Application is running!"));
     }
 
     @Test
-    void homeEndpointShouldReturnMessage() {
+    void healthEndpointShouldReturnUp() throws Exception {
 
-        String response = restTemplate.getForObject(
-                "http://localhost:" + port + "/",
-                String.class);
-
-        assertEquals(
-                "Java DevSecOps Application is running!",
-                response);
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("UP"));
     }
 }
