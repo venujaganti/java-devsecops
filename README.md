@@ -240,27 +240,27 @@ Workflow file:
 
 ### 🏠 Application
 
-![Application] (<Screenshot 2026-08-27 165159-1.png>)
+![Application](<Screenshot 2026-08-27 165159-1.png>)
 
 ### 🧪 Maven Tests
 
-![MavenTests] (<Screenshot 2026-08-27 165518.png>)
+![MavenTests](<Screenshot 2026-08-27 165518.png>)
 
 ### 🐳 Docker
 
-![Docker] (<Screenshot 2026-08-27 165549.png>)
+![Docker](<Screenshot 2026-08-27 165549.png>)
 
 ### ☸️ Kubernetes Deployment
 
-![Kubernetes] (<Screenshot 2026-08-27 165741.png>)
+![Kubernetes](<Screenshot 2026-08-27 165741.png>)
 
 ### 🔄 GitHub Actions
 
-![GitHub Actions] (<Screenshot 2026-08-27 173618.png>)
+![GitHub Actions](<Screenshot 2026-08-27 173618.png>)
 
 ### 🔐 Trivy Security Scan
 
-![Trivy Security Scan] (<Screenshot 2026-08-27 165958.png>)
+![Trivy Security Scan](<Screenshot 2026-08-27 165958.png>)
 
 ## 🎯 Project Objective
 
