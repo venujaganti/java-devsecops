@@ -42,7 +42,7 @@ Maven Test          OWASP Dependency Check
 java-devsecops/
 │
 ├── screenshots/
-│   ├── 01-application.png
+│   ├── 01-application.png 
 │   ├── 02-tests.png
 │   ├── 03-docker.png
 │   ├── 04-kubernetes.png
@@ -56,3 +56,31 @@ java-devsecops/
 ├── pom.xml
 ├── .gitignore
 └── README.md
+
+# Java DevSecOps Project
+
+## Project Screenshots
+
+### 1. Application
+
+![Application](screenshots/01-application.png)
+
+### 2. Maven Tests
+
+![Maven Tests](screenshots/02-tests.png)
+
+### 3. Docker
+
+![Docker](screenshots/03-docker.png)
+
+### 4. Kubernetes
+
+![Kubernetes](screenshots/04-kubernetes.png)
+
+### 5. GitHub Actions
+
+![GitHub Actions](screenshots/05-github-actions.png)
+
+### 6. Security Scan
+
+![Trivy Security Scan](screenshots/06-security-scan.png)
